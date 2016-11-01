@@ -14,12 +14,12 @@ echo 'password' | /usr/bin/vncpasswd -f > ~/.vnc/passwd
 chmod 600 ~/.vnc/passwd
 
 # Start VNC server
-su -c 'tightvncserver :1 -geometry 1024x768 -depth 24' root
-export 'DISPLAY=:1'
+su -c "tightvncserver $DISPLAY -geometry 1024x768 -depth 24" root
+# export 'DISPLAY=:1'
 /usr/bin/lxsession -s LXDE &
 
 # Autologin session
-echo 'password' | vncviewer -autopass :1 &
+nohup echo 'password' | vncviewer -autopass "$DISPLAY" &
 
 echo 'Display started'
 
